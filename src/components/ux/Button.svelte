@@ -1,4 +1,9 @@
 <script>
+  import { createEventDispatcher } from 'svelte'
+  const dispatch = createEventDispatcher()
+
+  dispatch('eventName')
+
   export let text = ''
   export let type = ''
   export let btnCls = ''
@@ -21,6 +26,7 @@
 
 <div class={'app-btn ' + btnCls}>
   <button
+    on:click
     class={type === 'danger' ? 'btn-danger' : type === 'dark' ? 'btn-dark' : 'btn-primary'}>
     {text}
     <slot />

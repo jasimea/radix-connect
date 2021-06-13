@@ -1,32 +1,85 @@
 <script>
+  import { onMount } from 'svelte'
+
   import ParticipantsVideo from '../components/meeting/ParticipantsVideo.svelte'
   import MeetingControls from '../components/meeting/MeetingControls.svelte'
 
-  let videos = [
+  let userId = 2
+  let id = 1
+
+  let participants = [
     {
-      url:
-        ' http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+      audio: true,
+      video: true,
+      id: ++id,
+      local: false,
+      user: {
+        name: 'John Doe',
+        avatar: 'https://i.pravatar.cc/150?img=32',
+        id: ++id,
+      },
     },
     {
-      url:
-        ' http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+      audio: true,
+      video: true,
+      id: ++id,
+      local: userId === 2 ? true : false,
+      user: {
+        name: 'Muhammed Hashim',
+        avatar: 'https://i.pravatar.cc/150?img=12',
+        id: ++id,
+      },
     },
     {
-      url: null,
+      audio: true,
+      video: true,
+      id: ++id,
+      local: false,
+      user: {
+        name: 'John Doe',
+        avatar: 'https://i.pravatar.cc/150?img=32',
+        id: ++id,
+      },
     },
     {
-      url:
-        ' http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+      audio: true,
+      video: true,
+      id: ++id,
+      local: userId === 2 ? true : false,
+      user: {
+        name: 'Muhammed Hashim',
+        avatar: 'https://i.pravatar.cc/150?img=12',
+        id: ++id,
+      },
     },
     {
-      url:
-        ' http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+      audio: true,
+      video: true,
+      id: ++id,
+      local: false,
+      user: {
+        name: 'John Doe',
+        avatar: 'https://i.pravatar.cc/150?img=32',
+        id: ++id,
+      },
     },
     {
-      url:
-        ' http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+      audio: true,
+      video: true,
+      id: ++id,
+      local: userId === 2 ? true : false,
+      user: {
+        name: 'Muhammed Hashim',
+        avatar: 'https://i.pravatar.cc/150?img=12',
+        id: ++id,
+      },
     },
   ]
+
+  const disableTrack = (type) => {
+    if (type === 'AUDIO') getUserMedia({ audio: false })
+    if (type === 'VIDEO') getUserMedia({ video: false })
+  }
 </script>
 
 <style>
@@ -49,13 +102,18 @@
 </style>
 
 <div class="flex items-center flex-col meeting h-full">
-  <div class="meeting-participants w-full">
-    {#each videos as video}
-      <ParticipantsVideo url={video.url} />
-    {/each}
-  </div>
+  {#if participants && participants.length}
+    <div class="meeting-participants justify-center items-center w-full">
+      {#each participants as participant}
+        <ParticipantsVideo streamProperties={participant} data="bull" />
+      {/each}
+    </div>
 
-  <div class="meeting-controls w-full">
-    <MeetingControls />
-  </div>
+    <div class="meeting-controls w-full">
+      <MeetingControls />
+    </div>
+  {:else}
+    <p>Loading....</p>
+  {/if}
+
 </div>

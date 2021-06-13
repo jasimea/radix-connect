@@ -1,5 +1,9 @@
 <script>
   import Button from '../ux/Button.svelte'
+
+  const onHandleClick = () => {
+    alert(true)
+  }
 </script>
 
 <div
@@ -8,7 +12,7 @@
   <Button type="dark" btnCls="mr-5">
     <ion-icon name="mic" class="text-2xl flex items-center" />
   </Button>
-  <Button type="dark" btnCls="mr-5">
+  <Button type="dark" btnCls="mr-5" :on:click={onHandleClick}>
     <ion-icon name="videocam-outline" class="text-2xl flex items-center" />
   </Button>
   <Button type="dark" btnCls="mr-5 relative">
