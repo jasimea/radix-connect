@@ -1,6 +1,4 @@
 <script>
-  import { onMount } from 'svelte'
-
   import ParticipantsVideo from '../components/meeting/ParticipantsVideo.svelte'
   import MeetingControls from '../components/meeting/MeetingControls.svelte'
 
@@ -76,19 +74,19 @@
     },
   ]
 
-  const disableTrack = (type) => {
-    if (type === 'AUDIO') getUserMedia({ audio: false })
-    if (type === 'VIDEO') getUserMedia({ video: false })
-  }
 </script>
 
 <style>
   .meeting-participants {
     display: grid;
     grid-template-columns: repeat(3, 32.33%);
-    grid-gap: 8px;
-    height: 80%;
+    grid-gap: 12px;
   }
+
+  .meeting-controls {
+    min-height: 150px;
+  }
+
   @media screen and (max-width: 990px) {
     .meeting-participants {
       grid-template-columns: repeat(2, 49.33%);
@@ -101,19 +99,17 @@
   }
 </style>
 
-<div class="flex items-center flex-col meeting h-full">
+<div class="flex items-stretch flex-col meeting h-full">
   {#if participants && participants.length}
-    <div class="meeting-participants justify-center items-center w-full">
+    <div class="meeting-participants justify-center items-center flex-1 overflow-auto">
       {#each participants as participant}
         <ParticipantsVideo streamProperties={participant} data="bull" />
       {/each}
     </div>
-
-    <div class="meeting-controls w-full">
+    <div class="meeting-controls">
       <MeetingControls />
     </div>
   {:else}
     <p>Loading....</p>
   {/if}
-
 </div>

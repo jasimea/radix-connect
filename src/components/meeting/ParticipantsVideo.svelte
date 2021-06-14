@@ -49,12 +49,12 @@
   }, [streamProperties])
 </script>
 
-<style>
+<style type="postcss">
   .participants-video h1 {
     background: #0000004f;
   }
   .participants-video video {
-    max-height: 270px;
+    /* max-height: 270px; */
   }
   .no-video-layout {
     @apply bg-secondary-dark rounded-xl flex items-center justify-center;
